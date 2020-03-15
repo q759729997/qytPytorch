@@ -7,6 +7,7 @@
 """
 import unittest
 import sys
+import time
 
 sys.path.insert(0, './')  # 定义搜索路径的优先顺序，序号从0开始，表示最大优先级
 
@@ -15,6 +16,7 @@ print('qytPytorch module path :{}'.format(qytPytorch.__file__))  # 输出测试�
 from qytPytorch.dataset.fashion_mnist import get_dataset  # noqa
 from qytPytorch.dataset.fashion_mnist import get_labels_by_ids  # noqa
 from qytPytorch.dataset.fashion_mnist import show_fashion_mnist  # noqa
+from qytPytorch.dataset.fashion_mnist import get_data_iter  # noqa
 
 
 class TestFashionMnist(unittest.TestCase):
@@ -24,6 +26,7 @@ class TestFashionMnist(unittest.TestCase):
         test_get_dataset - 获取数据集.
         test_get_labels_by_ids - 根据标签id获取标签具体描述.
         test_show_fashion_mnist - 展示图像与标签.
+        test_get_data_iter - 获取数据集迭代器.
     """
 
     @unittest.skip('debug')
@@ -45,7 +48,7 @@ class TestFashionMnist(unittest.TestCase):
         print(get_labels_by_ids(label_ids))  # ['trouser', 'sandal', 'dress']
         print(get_labels_by_ids(label_ids, return_Chinese=True))  # ['裤子', '凉鞋', '连衣裙']
 
-    # @unittest.skip('debug')
+    @unittest.skip('debug')
     def test_show_fashion_mnist(self):
         """ 展示图像与标签.
         """
@@ -58,6 +61,20 @@ class TestFashionMnist(unittest.TestCase):
             X.append(mnist_train[i][0])
             y.append(mnist_train[i][1])
         show_fashion_mnist(X, get_labels_by_ids(y))   # 直接弹出图片展示页面
+
+    # @unittest.skip('debug')
+    def test_get_data_iter(self):
+        """ 获取数据集迭代器.
+        """
+        print('{} test_get_data_iter {}'.format('-'*15, '-'*15))
+        data_path = './data/FashionMNIST'
+        mnist_train, mnist_test = get_dataset(data_path=data_path)
+        train_iter, test_iter = get_data_iter(mnist_train, mnist_test, batch_size=64)
+        # 读取一遍训练数据需要的时间
+        start = time.time()
+        for X, y in train_iter:
+            continue
+        print('%.2f sec' % (time.time() - start))  # 6.95 sec
 
 
 if __name__ == "__main__":

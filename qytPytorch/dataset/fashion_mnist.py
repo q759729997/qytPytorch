@@ -4,9 +4,13 @@
     Main members:
 
         # get_dataset - 获取数据集.
+        # get_data_iter - 获取数据集迭代器.
         # get_labels_by_ids - 根据标签id获取标签具体描述.
         # show_fashion_mnist - 展示图像与标签.
 """
+import sys
+
+import torch
 import torchvision
 from matplotlib import pyplot as plt
 
@@ -29,6 +33,29 @@ def get_dataset(data_path):
     logger.info('train data len :{}'.format(len(mnist_train)))
     logger.info('test data len :{}'.format(len(mnist_test)))
     return mnist_train, mnist_test
+
+
+def get_data_iter(mnist_train, mnist_test, batch_size=32):
+    """ 获取数据集迭代器.
+
+        @params:
+            mnist_train - 训练数据.
+            mnist_test - 测试数据.
+            batch_size - 批次大小.
+
+        @return:
+            On success - train与test数据迭代器.
+            On failure - 错误信息.
+    """
+    if sys.platform.startswith('win'):
+        num_workers = 0  # 0表示不用额外的进程来加速读取数据
+    else:
+        num_workers = 4
+    train_iter = torch.utils.data.DataLoader(mnist_train, batch_size=batch_size, shuffle=True, num_workers=num_workers)
+    test_iter = torch.utils.data.DataLoader(mnist_test, batch_size=batch_size, shuffle=False, num_workers=num_workers)
+    logger.info('train_iter len:{}'.format(len(train_iter)))
+    logger.info('test_iter len:{}'.format(len(test_iter)))
+    return train_iter, test_iter
 
 
 def get_labels_by_ids(label_ids, return_Chinese=False):
