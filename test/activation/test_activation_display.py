@@ -23,6 +23,10 @@ class TestActivationDisplay(unittest.TestCase):
     Main methods:
         test_ReLU - ReLU函数显示.
         test_ReLU_grad - ReLU函数梯度显示.
+        test_sigmoid - sigmoid函数显示.
+        test_sigmoid_grad - sigmoid函数梯度显示.
+        test_tanh - tanh函数显示.
+        test_tanh_grad - tanh函数梯度显示.
     """
 
     @unittest.skip('debug')
@@ -38,11 +42,49 @@ class TestActivationDisplay(unittest.TestCase):
     def test_ReLU_grad(self):
         """ ReLU函数梯度显示.
         """
-        print('{} test_ReLU {}'.format('-'*15, '-'*15))
+        print('{} test_ReLU_grad {}'.format('-'*15, '-'*15))
         data_x = torch.arange(-8.0, 8.0, 0.1, requires_grad=True)
         data_x.relu().sum().backward()
         data_y = data_x.grad
         show_x_y_axis(data_x.detach().numpy(), data_y.detach().numpy(), title='ReLU grad')  # 直接弹出图片
+
+    @unittest.skip('debug')
+    def test_sigmoid(self):
+        """ sigmoid函数显示.
+        """
+        print('{} test_sigmoid {}'.format('-'*15, '-'*15))
+        data_x = torch.arange(-8.0, 8.0, 0.1, requires_grad=True)
+        data_y = data_x.sigmoid()
+        show_x_y_axis(data_x.detach().numpy(), data_y.detach().numpy(), title='sigmoid')  # 直接弹出图片
+
+    @unittest.skip('debug')
+    def test_sigmoid_grad(self):
+        """ sigmoid函数梯度显示.
+        """
+        print('{} test_sigmoid_grad {}'.format('-'*15, '-'*15))
+        data_x = torch.arange(-8.0, 8.0, 0.1, requires_grad=True)
+        data_x.sigmoid().sum().backward()
+        data_y = data_x.grad
+        show_x_y_axis(data_x.detach().numpy(), data_y.detach().numpy(), title='sigmoid grad')  # 直接弹出图片
+
+    @unittest.skip('debug')
+    def test_tanh(self):
+        """ tanh函数显示.
+        """
+        print('{} test_tanh {}'.format('-'*15, '-'*15))
+        data_x = torch.arange(-8.0, 8.0, 0.1, requires_grad=True)
+        data_y = data_x.tanh()
+        show_x_y_axis(data_x.detach().numpy(), data_y.detach().numpy(), title='tanh')  # 直接弹出图片
+
+    # @unittest.skip('debug')
+    def test_tanh_grad(self):
+        """ tanh函数梯度显示.
+        """
+        print('{} test_tanh_grad {}'.format('-'*15, '-'*15))
+        data_x = torch.arange(-8.0, 8.0, 0.1, requires_grad=True)
+        data_x.tanh().sum().backward()
+        data_y = data_x.grad
+        show_x_y_axis(data_x.detach().numpy(), data_y.detach().numpy(), title='tanh grad')  # 直接弹出图片
 
 
 if __name__ == "__main__":
