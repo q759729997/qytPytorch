@@ -27,7 +27,7 @@ class TestNiN(unittest.TestCase):
         test_get_conv_out_shape - 计算NiN卷积层输出形状.
         test_get_parameter_number - 统计神经网络参数个数.
     """
-    # @unittest.skip('debug')
+    @unittest.skip('debug')
     def test_get_conv_out_shape(self):
         """计算NiN卷积层输出形状.
         """
@@ -39,7 +39,7 @@ class TestNiN(unittest.TestCase):
         y = net(x)
         print(y.shape)  # torch.Size([1, 10])
 
-    @unittest.skip('debug')
+    # @unittest.skip('debug')
     def test_get_parameter_number(self):
         """ 统计神经网络参数个数.
         """
