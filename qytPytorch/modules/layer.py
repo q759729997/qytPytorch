@@ -7,6 +7,7 @@
         # GlobalAvgPool2d - 全局平均池化层.
         # Inception - GoogLeNet中的基础卷积块Inception块.
         # Residual - 残差块.
+        # DenseBlock - 稠密块.
 """
 import torch
 from torch import nn
@@ -76,3 +77,27 @@ class Residual(nn.Module):
         if self.conv3:
             X = self.conv3(X)
         return F.relu(Y + X)
+
+
+class DenseBlock(nn.Module):
+    """稠密块"""
+    def __init__(self, num_convs, in_channels, out_channels):
+        super().__init__()
+        net = []
+        for i in range(num_convs):
+            in_c = in_channels + i * out_channels
+            net.append(self._conv_block(in_c, out_channels))
+        self.net = nn.ModuleList(net)
+        self.out_channels = in_channels + num_convs * out_channels  # 计算输出通道数
+
+    def _conv_block(self, in_channels, out_channels):
+        blk = nn.Sequential(nn.BatchNorm2d(in_channels), 
+                            nn.ReLU(),
+                            nn.Conv2d(in_channels, out_channels, kernel_size=3, padding=1))
+        return blk
+
+    def forward(self, X):
+        for blk in self.net:
+            Y = blk(X)
+            X = torch.cat((X, Y), dim=1)  # 在通道维上将输入和输出连结
+        return X
