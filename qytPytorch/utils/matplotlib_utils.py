@@ -25,7 +25,7 @@ def set_figsize(figsize=(3.5, 2.5)):
     plt.rcParams['figure.figsize'] = figsize
 
 
-def show_x_y_axis(data_x, data_y, label_x='x axis', label_y='y axis', title='matplotlib show'):
+def show_x_y_axis(data_x, data_y, label_x='x axis', label_y='y axis', title='matplotlib show', annotates=list()):
     """ 显示x、y坐标系.
 
         @params:
@@ -34,9 +34,13 @@ def show_x_y_axis(data_x, data_y, label_x='x axis', label_y='y axis', title='mat
             label_x - x轴标签.
             label_y - y轴标签.
             title - 标题.
+            annotates - 注解[{'text': 文本, 'xy': 函数曲线坐标, 'xytext': 文本所在坐标, 'arrowstyle': 箭头类型}].
     """
     plt.title(title)
     plt.xlabel(label_x)
     plt.ylabel(label_y)
     plt.plot(data_x, data_y)
+    for annotate_item in annotates:
+        arrowstyle = annotate_item.get('arrowstyle', '->')
+        plt.annotate(annotate_item['text'], xy=annotate_item['xy'], xytext=annotate_item['xytext'], arrowprops=dict(arrowstyle=arrowstyle))
     plt.show()
