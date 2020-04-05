@@ -4,6 +4,9 @@
     Main members:
 
         # read_imdb - 获取数据集.
+        # get_tokenized_imdb - imdb分词.
+        # get_imdb_data_iter - 预处理数据集,构造DataLoader.
+        # predict_sentiment - 预测.
 """
 import codecs
 import os
@@ -84,3 +87,21 @@ def get_imdb_data_iter(imdb_data, vocab, padding_length=500, batch_size=32, shuf
     dataset = Data.TensorDataset(features, labels)
     data_iter = Data.DataLoader(dataset, batch_size=batch_size, shuffle=shuffle)
     return data_iter
+
+
+def predict_sentiment(net, vocab_obj, words):
+    """ 预测.
+
+        @params:
+            net - 模型.
+            vocab_obj - 参数2.
+            words - 待预测的句子词汇列表
+
+        @return:
+            On success - 情感字符串，positive或negative.
+            On failure - 错误信息.
+    """
+    device = list(net.parameters())[0].device
+    sentence = torch.tensor([vocab_obj.stoi[word] for word in words], device=device)
+    label = torch.argmax(net(sentence.view((1, -1))), dim=1)
+    return 'positive' if label.item() == 1 else 'negative'
