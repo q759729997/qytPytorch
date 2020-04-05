@@ -16,7 +16,7 @@ import qytPytorch  # noqa
 print('qytPytorch module path :{}'.format(qytPytorch.__file__))  # 输出测试模块文件位置
 from qytPytorch.utils.cnn_utils import get_Conv2d_out_shape  # noqa
 from qytPytorch.utils.cnn_utils import get_MaxPool2d_out_shape  # noqa
-from qytPytorch.models.lenet import LeNet  # noqa
+from qytPytorch.models.cv.image_classify import LeNet  # noqa
 from qytPytorch.utils.statistics_utils import get_parameter_number  # noqa
 
 

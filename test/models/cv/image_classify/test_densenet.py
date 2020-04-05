@@ -1,5 +1,5 @@
 """
-    main_module - ResNet18，测试时将对应方法的@unittest.skip注释掉.
+    main_module - DenseNet，测试时将对应方法的@unittest.skip注释掉.
 
     Main members:
 
@@ -16,23 +16,23 @@ import qytPytorch  # noqa
 print('qytPytorch module path :{}'.format(qytPytorch.__file__))  # 输出测试模块文件位置
 from qytPytorch.utils.cnn_utils import get_Conv2d_out_shape  # noqa
 from qytPytorch.utils.cnn_utils import get_MaxPool2d_out_shape  # noqa
-from qytPytorch.models.resnet import ResNet18  # noqa
+from qytPytorch.models.cv.image_classify import DenseNet  # noqa
 from qytPytorch.utils.statistics_utils import get_parameter_number  # noqa
 
 
-class TestResNet18(unittest.TestCase):
-    """ResNet18.
+class TestDenseNet(unittest.TestCase):
+    """DenseNet.
 
     Main methods:
-        test_get_out_shape - 计算ResNet18输出形状.
+        test_get_out_shape - 计算DenseNet输出形状.
         test_get_parameter_number - 统计神经网络参数个数.
     """
     @unittest.skip('debug')
     def test_get_out_shape(self):
-        """计算ResNet18输出形状.
+        """计算DenseNet输出形状.
         """
         print('{} test_get_out_shape {}'.format('-'*15, '-'*15))
-        net = ResNet18()
+        net = DenseNet()
         # print(net)
         input_shape = (1, 1, 224, 224)  # 批量大小, 通道, 高, 宽
         x = torch.ones(input_shape)
@@ -45,9 +45,9 @@ class TestResNet18(unittest.TestCase):
         """ 统计神经网络参数个数.
         """
         print('{} test_get_parameter_number {}'.format('-'*15, '-'*15))
-        net = ResNet18()
+        net = DenseNet()
         print(net)
-        print(get_parameter_number(net))  # {'total': 11178378, 'trainable': 11178378}
+        print(get_parameter_number(net))  # {'total': 758226, 'trainable': 758226}
 
 
 if __name__ == "__main__":

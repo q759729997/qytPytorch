@@ -5,6 +5,8 @@
 
         # train_net - 训练神经网络.
 """
+from tqdm import tqdm
+
 from qytPytorch import logger
 from qytPytorch.metric.accuracy import evaluate_accuracy
 
@@ -23,7 +25,7 @@ def train_net(net, train_iter, dev_iter, max_epoch, optimizer, loss_func):
     for epoch in range(max_epoch):
         logger.info('epoch {} begin to train'.format(epoch + 1))
         train_l_sum, train_acc_sum, n = 0.0, 0.0, 0
-        for X, y in train_iter:
+        for X, y in tqdm(train_iter):
             y_hat = net(X)
             loss = loss_func(y_hat, y).sum()
             # 梯度清零
