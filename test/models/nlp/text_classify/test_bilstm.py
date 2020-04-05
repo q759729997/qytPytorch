@@ -83,7 +83,7 @@ class TestBiLSTM(unittest.TestCase):
         print('test_iter len:{}'.format(len(test_iter)))  # test_iter len:3218
         # 构造模型
         net = BiLSTM(vocab_size=vocab_size, labels_size=2)
-        print('参数量:{}'.format(get_parameter_number(net)))
+        print('参数量:{}'.format(get_parameter_number(net)))  # total:436.002 Thousand, trainable:436.002 Thousand
         print(net)
         optimizer = torch.optim.Adam(filter(lambda p: p.requires_grad, net.parameters()))
         loss_func = nn.CrossEntropyLoss()
