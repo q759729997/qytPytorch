@@ -14,9 +14,9 @@ sys.path.insert(0, './')  # 定义搜索路径的优先顺序，序号从0开始
 import qytPytorch  # noqa
 print('qytPytorch module path :{}'.format(qytPytorch.__file__))  # 输出测试模块文件位置
 from qytPytorch.utils.file_units import extract_tarfile  # noqa
-from qytPytorch.dataset.nlp.imdb import read_imdb  # noqa
-from qytPytorch.dataset.nlp.imdb import get_tokenized_imdb  # noqa
-from qytPytorch.dataset.nlp.imdb import get_imdb_data_iter  # noqa
+from qytPytorch.dataset.nlp.text_classification.imdb import read_imdb  # noqa
+from qytPytorch.dataset.nlp.text_classification.imdb import get_tokenized_imdb  # noqa
+from qytPytorch.dataset.nlp.text_classification.imdb import get_imdb_data_iter  # noqa
 from qytPytorch.utils.serialize import save_serialize_obj  # noqa
 from qytPytorch.utils.serialize import load_serialize_obj  # noqa
 from qytPytorch.core.vocabulary import get_tokenized_vocab  # noqa
