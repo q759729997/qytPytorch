@@ -8,8 +8,6 @@
 import unittest
 import sys
 
-import torch
-
 sys.path.insert(0, './')  # 定义搜索路径的优先顺序，序号从0开始，表示最大优先级
 
 import qytPytorch  # noqa
