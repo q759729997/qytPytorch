@@ -13,10 +13,10 @@ sys.path.insert(0, './')  # 定义搜索路径的优先顺序，序号从0开始
 
 import qytPytorch  # noqa
 print('qytPytorch module path :{}'.format(qytPytorch.__file__))  # 输出测试模块文件位置
-from qytPytorch.dataset.cv.fashion_mnist import get_dataset  # noqa
-from qytPytorch.dataset.cv.fashion_mnist import get_labels_by_ids  # noqa
-from qytPytorch.dataset.cv.fashion_mnist import show_fashion_mnist  # noqa
-from qytPytorch.dataset.cv.fashion_mnist import get_data_iter  # noqa
+from qytPytorch.dataset.cv.image_classification.fashion_mnist import get_dataset  # noqa
+from qytPytorch.dataset.cv.image_classification.fashion_mnist import get_labels_by_ids  # noqa
+from qytPytorch.dataset.cv.image_classification.fashion_mnist import show_fashion_mnist  # noqa
+from qytPytorch.dataset.cv.image_classification.fashion_mnist import get_data_iter  # noqa
 
 
 class TestFashionMnist(unittest.TestCase):
@@ -28,14 +28,14 @@ class TestFashionMnist(unittest.TestCase):
         test_show_fashion_mnist - 展示图像与标签.
         test_get_data_iter - 获取数据集迭代器.
     """
+    data_path = './data/cv/FashionMNIST'
 
     @unittest.skip('debug')
     def test_get_dataset(self):
         """ 获取数据集.
         """
         print('{} test_get_dataset {}'.format('-'*15, '-'*15))
-        data_path = './data/FashionMNIST'
-        mnist_train, mnist_test = get_dataset(data_path=data_path)
+        mnist_train, mnist_test = get_dataset(data_path=self.data_path)
         feature, label = mnist_train[0]
         print(feature.shape, label)  # torch.Size([1, 28, 28]) 9
 
@@ -53,8 +53,7 @@ class TestFashionMnist(unittest.TestCase):
         """ 展示图像与标签.
         """
         print('{} test_show_fashion_mnist {}'.format('-'*15, '-'*15))
-        data_path = './data/FashionMNIST'
-        mnist_train, mnist_test = get_dataset(data_path=data_path)
+        mnist_train, mnist_test = get_dataset(data_path=self.data_path)
         feature, label = mnist_train[0]
         X, y = [], []
         for i in range(10):
@@ -67,8 +66,7 @@ class TestFashionMnist(unittest.TestCase):
         """ 获取数据集迭代器.
         """
         print('{} test_get_data_iter {}'.format('-'*15, '-'*15))
-        data_path = './data/FashionMNIST'
-        mnist_train, mnist_test = get_dataset(data_path=data_path)
+        mnist_train, mnist_test = get_dataset(data_path=self.data_path)
         train_iter, test_iter = get_data_iter(mnist_train, mnist_test, batch_size=64)
         # 读取一遍训练数据需要的时间
         start = time.time()

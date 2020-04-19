@@ -1,5 +1,5 @@
 """
-    module(bleu) - BLEU（Bilingual Evaluation Understudy）评估.
+    module(bleu) - BLEU（Bilingual Evaluation Understudy）评估；主要用于机器翻译评估.
 
     Main members:
 
