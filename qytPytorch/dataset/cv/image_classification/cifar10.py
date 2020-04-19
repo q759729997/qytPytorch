@@ -89,13 +89,9 @@ def show_fashion_cifar10(images, labels):
             images - 图像特征列表.
             labels - 图像标签列表.
     """
-    # TODO 彩色图片显示
-    # use_svg_display()
-    # _表示我们忽略（不使用）的变量
-    _, figs = plt.subplots(1, len(images), figsize=(12, 12))
+    _, figs = plt.subplots(1, len(images), figsize=(15, 15))
     for f, img, lbl in zip(figs, images, labels):
-        # img = img / 255.0
-        img = img.numpy().reshape((32, 32, 3))
+        img = img.permute(1, 2, 0)  # 由torch.Size([3, 32, 32])转换为torch.Size([32, 32, 3])
         f.imshow(img)
         f.set_title(lbl)
         f.axes.get_xaxis().set_visible(False)

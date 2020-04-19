@@ -48,7 +48,7 @@ class TestCIFAR10(unittest.TestCase):
         print(get_labels_by_ids(label_ids))  # ['automobile', 'dog', 'cat']
         print(get_labels_by_ids(label_ids, return_Chinese=True))  # ['汽车', '狗', '猫']
 
-    @unittest.skip('debug')
+    # @unittest.skip('debug')
     def test_show_fashion_cifar10(self):
         """ 展示图像与标签.
         """
@@ -61,7 +61,7 @@ class TestCIFAR10(unittest.TestCase):
             y.append(cifar10_train[i][1])
         show_fashion_cifar10(X, get_labels_by_ids(y))   # 直接弹出图片展示页面
 
-    # @unittest.skip('debug')
+    @unittest.skip('debug')
     def test_get_data_iter(self):
         """ 获取数据集迭代器.
         """

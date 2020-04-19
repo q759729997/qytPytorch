@@ -48,7 +48,7 @@ class TestFashionMnist(unittest.TestCase):
         print(get_labels_by_ids(label_ids))  # ['trouser', 'sandal', 'dress']
         print(get_labels_by_ids(label_ids, return_Chinese=True))  # ['裤子', '凉鞋', '连衣裙']
 
-    @unittest.skip('debug')
+    # @unittest.skip('debug')
     def test_show_fashion_mnist(self):
         """ 展示图像与标签.
         """
@@ -61,7 +61,7 @@ class TestFashionMnist(unittest.TestCase):
             y.append(mnist_train[i][1])
         show_fashion_mnist(X, get_labels_by_ids(y))   # 直接弹出图片展示页面
 
-    # @unittest.skip('debug')
+    @unittest.skip('debug')
     def test_get_data_iter(self):
         """ 获取数据集迭代器.
         """
